@@ -118,6 +118,8 @@ pkill -f airflow
 export AIRFLOW_HOME=$(pwd) && poetry run airflow db reset --yes
 ```
 
+> Create database, create admin user and run schedule again.
+
 Check executor:
 
 ```bash
