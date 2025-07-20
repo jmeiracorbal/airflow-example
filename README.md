@@ -172,11 +172,26 @@ Services on docker-compose:
 - `airflow`: Airflow webserver on port 8080
 - `airflow-scheduler`: Airflow scheduler for task execution
 
-
 Access the UI at `http://localhost:8080` with:
 
-- Username: `admin`
-- Password: `admin`
+- Username: `admin`.
+- Password: `admin`.
+
+### Environment Variables
+
+Customize user by setting with environment variables:
+
+- `AIRFLOW__ADMIN__USER`: Admin username (default: admin)
+- `AIRFLOW__ADMIN__PASSWORD`: Admin password (default: admin)
+- `AIRFLOW__ADMIN__EMAIL`: Admin email (default: admin@example.com)
+- `AIRFLOW__ADMIN__FIRSTNAME`: Admin first name (default: Admin)
+- `AIRFLOW__ADMIN__LASTNAME`: Admin last name (default: User)
+
+You can add a `.env` file and the attribute env_file to the `docker-compose.yml` too or you can define just in time:
+
+```bash
+AIRFLOW__ADMIN__USER=miadmin AIRFLOW__ADMIN__PASSWORD=mipassword docker-compose up -d
+```
 
 Volumes:
 

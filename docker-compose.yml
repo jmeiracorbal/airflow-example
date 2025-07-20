@@ -13,7 +13,7 @@ services:
       interval: 5s
       retries: 5
 
-  # run only to initialize the database
+  # service to init the database and create the admin user
   airflow-init:
     build: ./docker
     depends_on:
@@ -24,13 +24,19 @@ services:
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
       AIRFLOW__CORE__FERNET_KEY: gst3hSzP5LP5enFSG/dZtHVWaRn+OI3SNuo9O17AaYE=
       AIRFLOW__CORE__LOAD_EXAMPLES: "False"
+      # Custom variables to create the admin user
+      AIRFLOW__ADMIN__USER: ${AIRFLOW__ADMIN__USER:-admin}
+      AIRFLOW__ADMIN__PASSWORD: ${AIRFLOW__ADMIN__PASSWORD:-admin}
+      AIRFLOW__ADMIN__EMAIL: ${AIRFLOW__ADMIN__EMAIL:-admin@apache.aiflow.com}
+      AIRFLOW__ADMIN__FIRSTNAME: ${AIRFLOW__ADMIN__FIRSTNAME:-Admin}
+      AIRFLOW__ADMIN__LASTNAME: ${AIRFLOW__ADMIN__LASTNAME:-User}
     command: >
       bash -c "
         airflow db migrate &&
         airflow connections create-default-connections &&
-        airflow users create --username admin --firstname Admin --lastname User --role Admin --email admin@example.com --password admin || true
+        airflow users create --username $${AIRFLOW__ADMIN__USER} --firstname $${AIRFLOW__ADMIN__FIRSTNAME} --lastname $${AIRFLOW__ADMIN__LASTNAME} --role Admin --email $${AIRFLOW__ADMIN__EMAIL} --password $${AIRFLOW__ADMIN__PASSWORD} || true
       "
-
+      
   airflow:
     build: ./docker
     depends_on:
