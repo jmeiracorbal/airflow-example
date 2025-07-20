@@ -1,6 +1,12 @@
 # Apache Airflow Example
 
-This it's an experimental example with Apache Airflow.
+> This it's an experimental example with Apache Airflow.
+
+[![Apache Airflow](https://img.shields.io/badge/Apache%20Airflow-017CEE?style=for-the-badge&logo=apache-airflow&logoColor=white)](https://airflow.apache.org/)
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org/)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://docker.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)](https://postgresql.org/)
+[![Educational](https://img.shields.io/badge/Educational-Example-FF6B6B?style=for-the-badge)](https://github.com/apache/airflow)
 
 # Concepts
 
