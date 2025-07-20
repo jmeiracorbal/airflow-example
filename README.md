@@ -2,6 +2,7 @@
 
 > This is an experimental example with Apache Airflow.
 
+<p>
   <a href="https://airflow.apache.org/">
     <img src="https://img.shields.io/badge/Apache%20Airflow-017CEE?style=for-the-badge&logo=apache-airflow&logoColor=white" alt="Apache Airflow">
   </a>
@@ -20,6 +21,7 @@
   <a href="https://pages.github.com/">
     <img src="https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Pages">
   </a>
+</p>
 
 ## 📋 Table of Contents
 
@@ -63,7 +65,7 @@ apache-airflow/
 
 # Standalone
 
-> poetry as depednecy manager.
+> Poetry as dependency manager.
 
 ## Considerations
 
@@ -91,7 +93,7 @@ sql_alchemy_conn = postgresql://user:pass@localhost/airflow
 
 ## Install
 
-> this install uses poetry as depednecy manager.
+> This install uses poetry as dependency manager.
 
 Check python version:
 
