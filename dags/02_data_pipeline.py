@@ -52,12 +52,10 @@ def transform_data(**context):
     """Combina y transforma los datos extraídos"""
     print("Transformando datos...")
     
-    # Obtener datos de las tareas anteriores
     ti = context['ti']
     sales_data = ti.xcom_pull(task_ids='extract_sales')
     inventory_data = ti.xcom_pull(task_ids='extract_inventory')
     
-    # Simular transformación
     time.sleep(3)
     
     transformed_data = {

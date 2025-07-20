@@ -2,11 +2,43 @@
 
 This it's an experimental example with Apache Airflow.
 
+# Concepts
+
+- **DAGs** (Directed Acyclic Graphs): Define workflows as a collection of tasks with dependencies.
+- **Tasks**: Individual units of work within a DAG (PythonOperator, BashOperator, etc.).
+- **Operators**: Predefined task types that define what work to execute.
+- **Schedulers**: Airflow component that monitors DAGs and triggers task execution.
+- **Executors**: Determine how tasks are executed (SequentialExecutor, LocalExecutor, CeleryExecutor).
+- **Web Server**: UI for monitoring and managing DAGs, tasks, and workflows.
+- **Metadata Database**: Stores DAG definitions, task states, and execution history.
+- **Fernet Key**: Encryption key for securing sensitive data like connection passwords and variables. Without this key, Airflow can't manage encrypted data with secure methods.
+
+# Structure
+
+```text
+apache-airflow/
+├── docker-compose.yml
+├── dags/
+├── logs/
+├── plugins/
+├── standalone/
+│   ├── requirements.txt
+│   ├── airflow.cfg
+│   ├── pyproject.toml
+│   └── airflow.db
+└── docker/
+    ├── Dockerfile
+    ├── requirements.txt
+    └── .dockerignore
+```
+
+# Standalone
+
 > poetry as depednecy manager.
 
-## Using locally
+## Considerations
 
-Using SQLite problems:
+Using SQLite problems, it's recommended change to another complex engine:
 
 1. One process write on DB.
 2. Without concurrent connections
@@ -30,6 +62,8 @@ sql_alchemy_conn = postgresql://user:pass@localhost/airflow
 
 ## Install
 
+> this install uses poetry as depednecy manager.
+
 Check python version:
 
 ```bash
@@ -52,13 +86,15 @@ Create DAGs (workflows) directory:
 mkdir -p dags logs plugins
 ```
 
+> DAGs can be executed from UI and API too.
+
 Indicate where is AIRFLOW_HOME (using locally):
 
 ```bash
 export AIRFLOW_HOME=$(pwd)
 ```
 
-# Running Airflow
+## Run Airflow
 
 ```bash
 poetry run airflow db init
@@ -85,7 +121,7 @@ poetry run airflow users create --username admin --firstname Admin --lastname Us
 Example server (deploy locally):
 
 ```bash
-poetry run airflow webserver --port 8080
+poetry run airflow api-server --port 8080
 ```
 
 ```bash
@@ -104,9 +140,48 @@ Run your DAGs:
 poetry run airflow dags test hola_mundo 2024-01-01
 ```
 
-> DAGs can be executed from UI and API too.
+# Containerized
+
+First of all, generate a fernet key:
+
+```bash
+openssl rand -base64 32
+```
+
+## Run
+
+```bash
+docker compose up -d
+```
+
+This will:
+- Start PostgreSQL database
+- Initialize Airflow database and create admin user
+- Start Airflow webserver and scheduler.
+
+Services on docker-compose:
+
+- `postgres`: PostgreSQL database with persistent volume
+- `airflow-init`: One-time database initialization and admin user creation
+- `airflow`: Airflow webserver on port 8080
+- `airflow-scheduler`: Airflow scheduler for task execution
+
+
+Access the UI at `http://localhost:8080` with:
+
+- Username: `admin`
+- Password: `admin`
+
+Volumes:
+
+- `postgres_data`: PostgreSQL database persistence
+- `./dags`: DAGs directory (bind mount)
+- `./logs`: Logs directory (bind mount)
+- `./plugins`: Plugins directory (bind mount)
 
 # Troubleshooting
+
+## Standalone
 
 If first install fail, you can reset the database connection.
 
@@ -120,6 +195,17 @@ export AIRFLOW_HOME=$(pwd) && poetry run airflow db reset --yes
 
 > Create database, create admin user and run schedule again.
 
+### Alternative: Standalone Mode
+
+For a complete setup with automatic admin user creation:
+
+```bash
+cd standalone
+poetry run airflow standalone
+```
+
+This starts API server, scheduler, and webserver in one command.
+
 Check executor:
 
 ```bash
@@ -131,4 +217,28 @@ Check the SQL alchemy:
 ```bash
 poetry run airflow config get-value database sql_alchemy_conn
 ```
+
+## Containerized
+
+### Services Status
+
+```bash
+docker compose ps
+```
+
+### View Logs
+
+```bash
+docker compose logs airflow
+docker compose logs airflow-scheduler
+```
+
+### Database Reset
+
+```bash
+docker compose down -v
+docker compose up -d
+```
+
+> This removes all data and reinitializes the database.
 
