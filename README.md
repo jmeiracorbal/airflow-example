@@ -1,12 +1,35 @@
 # Apache Airflow Example
 
-> This it's an experimental example with Apache Airflow.
+> This is an experimental example with Apache Airflow.
 
-[![Apache Airflow](https://img.shields.io/badge/Apache%20Airflow-017CEE?style=for-the-badge&logo=apache-airflow&logoColor=white)](https://airflow.apache.org/)
-[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org/)
-[![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://docker.com/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)](https://postgresql.org/)
-[![Educational](https://img.shields.io/badge/Educational-Example-FF6B6B?style=for-the-badge)](https://github.com/apache/airflow)
+  <a href="https://airflow.apache.org/">
+    <img src="https://img.shields.io/badge/Apache%20Airflow-017CEE?style=for-the-badge&logo=apache-airflow&logoColor=white" alt="Apache Airflow">
+  </a>
+  <a href="https://python.org/">
+    <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  </a>
+  <a href="https://docker.com/">
+    <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
+  </a>
+  <a href="https://postgresql.org/">
+    <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL">
+  </a>
+  <a href="https://github.com/apache/airflow">
+    <img src="https://img.shields.io/badge/Educational-Example-FF6B6B?style=for-the-badge" alt="Educational">
+  </a>
+  <a href="https://pages.github.com/">
+    <img src="https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Pages">
+  </a>
+
+## 📋 Table of Contents
+
+- [Concepts](#concepts)
+- [Structure](#structure)
+- [Standalone Setup](#standalone)
+- [Containerized Setup](#containerized)
+- [Troubleshooting](#troubleshooting)
+
+---
 
 # Concepts
 

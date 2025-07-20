@@ -1,0 +1,7 @@
+# GitHub Pages configuration
+# This tells GitHub Pages to use README.md as the index page
+
+# Theme configuration
+theme: jekyll-theme-cayman
+title: Apache Airflow Example
+description: This is an experimental example with Apache Airflow.
